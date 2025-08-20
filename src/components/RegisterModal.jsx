@@ -589,7 +589,8 @@ const RegisterModal = ({ isOpen, onClose, onSwitchToLogin }) => {
                 onSwitchToLogin();
             }, 2000);
         } catch (err) {
-            setError(err.response?.data || 'OTP verification failed.');
+           // This ensures you only try to display the 'message' string from the error object.
+            setError(err.response?.data?.message || err.response?.data || 'Failed to send OTP.');
         } finally {
             setLoading(false);
         }

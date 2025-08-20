@@ -174,7 +174,7 @@ const Navbar = ({ onLoginClick, onSignUpClick }) => {
       <div className="px-4 py-3 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           <Link to={user ? "/home" : "/"} className="flex items-center space-x-3">
-            <img className="h-12 w-auto" src="https://www.nhsrcindia.org/sites/default/files/2022-01/NHSRC_SA_EN_Colour_0.png" alt="NHSRC Logo" />
+            <img className="h-12 w-auto" src="/public/assets/images/login/nhscr-logo_1.png" alt="NHSRC Logo" />
             <span className="hidden sm:inline text-xl font-bold text-gray-800">NHSRC Booking</span>
           </Link>
           <div className="flex items-center space-x-4">
@@ -185,8 +185,8 @@ const Navbar = ({ onLoginClick, onSignUpClick }) => {
               </>
             ) : (
               <div className="flex items-center space-x-2">
-                <button onClick={onLoginClick} className="px-4 py-2 text-sm font-medium text-blue-600 border border-blue-600 rounded-md hover:bg-blue-50">Sign In</button>
-                <button onClick={onSignUpClick} className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700">Sign Up</button>
+                <button onClick={onLoginClick} className="px-4 py-2 text-sm font-medium text-blue-100  bg-blue-600  border border-blue-600 rounded-md hover:bg-red-600">Sign In</button>
+                <button onClick={onSignUpClick} className="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-md hover:bg-blue-700">Sign Up</button>
               </div>
             )}
           </div>
