@@ -1,5 +1,8 @@
 
 
+// File: src/components/LoginModal.jsx
+// UPDATED: Added the email auto-suggest feature.
+
 import React, { useState } from 'react';
 import { useAuth } from '../hooks/useAuth';
 import { Link } from 'react-router-dom';
@@ -15,7 +18,24 @@ const LoginModal = ({ isOpen, onClose, onSwitchToRegister }) => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [emailSuggestions, setEmailSuggestions] = useState([]);
   const { login } = useAuth();
+
+  const handleEmailChange = (e) => {
+    const value = e.target.value;
+    setEmail(value);
+    if (value.includes('@') && !value.split('@')[1]) {
+        const emailUser = value.split('@')[0];
+        setEmailSuggestions([`${emailUser}@nhsrcindia.org`, `${emailUser}@nhsrcindiaextn.org`]);
+    } else {
+        setEmailSuggestions([]);
+    }
+  };
+
+  const selectSuggestion = (value) => {
+    setEmail(value);
+    setEmailSuggestions([]);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -56,7 +76,12 @@ const LoginModal = ({ isOpen, onClose, onSwitchToRegister }) => {
           <form className="mt-8 space-y-4" onSubmit={handleSubmit}>
             <div className="relative">
               <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"><EmailIcon /></div>
-              <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} className={inputBaseStyle} placeholder="Email Address" disabled={loading} />
+              <input type="email" id="email" value={email} onChange={handleEmailChange} className={inputBaseStyle} placeholder="Email Address" disabled={loading} />
+              {emailSuggestions.length > 0 && (
+                <ul className="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-md shadow-lg">
+                    {emailSuggestions.map(s => <li key={s} onClick={() => selectSuggestion(s)} className="px-4 py-2 cursor-pointer hover:bg-gray-100">{s}</li>)}
+                </ul>
+              )}
             </div>
             <div className="relative">
               <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"><LockIcon /></div>

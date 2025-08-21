@@ -13,7 +13,6 @@ const PublicLayout = () => {
   const [isLoginModalOpen, setLoginModalOpen] = useState(false);
   const [isRegisterModalOpen, setRegisterModalOpen] = useState(false);
 
-  // These functions control which modal is visible and ensure only one is open at a time.
   const openLogin = () => {
     setRegisterModalOpen(false);
     setLoginModalOpen(true);
@@ -26,7 +25,6 @@ const PublicLayout = () => {
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-100">
-      {/* The functions are passed down as props to the Navbar */}
       <Navbar onLoginClick={openLogin} onSignUpClick={openRegister} />
       <Hero />
       <ImageScroller />
@@ -34,7 +32,6 @@ const PublicLayout = () => {
         <Outlet context={{ openLoginModal: openLogin }} /> 
       </main>
       <Footer />
-      {/* The modals are rendered here and controlled by the state in this component */}
       <LoginModal isOpen={isLoginModalOpen} onClose={() => setLoginModalOpen(false)} onSwitchToRegister={openRegister} />
       <RegisterModal isOpen={isRegisterModalOpen} onClose={() => setRegisterModalOpen(false)} onSwitchToLogin={openLogin} />
     </div>
